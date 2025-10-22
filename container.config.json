@@ -1,8 +1,8 @@
 {
-  	// 本配置文件仅配合模板部署使用，为模板部署的服务生成「服务设置」的初始值。
-	// 模板部署结束后，后续服务发布与本配置文件完全无关，修改「服务设置」请到控制台操作。
-	// 复制模板代码自行开发请忽略本配置文件。
-  
+  // 本配置文件仅配合模板部署使用，为模板部署的服务生成「服务设置」的初始值。
+  // 模板部署结束后，后续服务发布与本配置文件完全无关，修改「服务设置」请到控制台操作。
+  // 复制模板代码自行开发请忽略本配置文件。
+
   "containerPort": 80,
   "dockerfilePath": "Dockerfile",
   "buildDir": "",
@@ -13,21 +13,36 @@
   "policyType": "cpu",
   "policyThreshold": 80,
   "policyDetails": [
-	{
-		"PolicyType": "cpu",
-		"PolicyThreshold": 80
-	},
-	{
-		"PolicyType": "mem",
-		"PolicyThreshold": 80
-	}
+    {
+      "PolicyType": "cpu",
+      "PolicyThreshold": 80
+    },
+    {
+      "PolicyType": "mem",
+      "PolicyThreshold": 80
+    }
   ],
-  "envParams": {},
+
+  // 重要：在控制台的「环境变量」中填写真实值更安全。此处的值仅作为模板初始值。
+  "envParams": {
+    // 服务号 AppID（必填）
+    "WX_APPID": "",
+    // 服务号 AppSecret（必填，建议仅在控制台设置，不要提交到仓库）
+    "WX_SECRET": "",
+    // 公众号“服务器配置”里的 Token（用于 /wx/callback 验签，必填）
+    "WX_TOKEN": "",
+    // 云开发环境 ID（用于 tcb.init），如：prod-xxxx（必填）
+    "TCB_ENV_ID": ""
+  },
+
   "customLogs": "stdout",
   "initialDelaySeconds": 2,
+
+  // 以下为示例的数据库初始化配置，如果你的项目不使用此 MySQL 示例，可以保留或移除
   "dataBaseName": "nodejs_demo",
   "executeSQLs": [
     "CREATE DATABASE IF NOT EXISTS nodejs_demo;",
     "USE nodejs_demo;"
   ]
 }
+
